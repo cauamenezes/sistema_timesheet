@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timesheet - Lançamentos</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f8fb;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+ 
+    .header {
+      background-color: #004b8d;
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+ 
+    .header h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+ 
+    .btn-sair {
+      background-color: #e74c3c;
+      border: none;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s ease;
+    }
+ 
+    .btn-sair:hover {
+      background-color: #c0392b;
+    }
+ 
+    .content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+ 
+    .logo {
+      max-width: 300px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+ 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Timesheet - Lançamentos</title>
+  <style>
+  .mes-legenda-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+ 
+  .legenda-status {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    flex-wrap: wrap;
+  }
+ 
+  .legenda-status div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+ 
+  .cor {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1px solid #999;
+  }
+ 
+  .legenda-fimsemana {
+    background-color: #fff4b8;
+  }
+ 
+  .legenda-feriado {
+    background-color: #f8caca;
+  }
+ 
+  .legenda-duplicado {
+    background-color: #a8f8a8;
+  }
+ 
+  @keyframes destaqueDuplicacao {
+    from { background-color: #a8ffc9; }
+    to { background-color: #a8ffc9; }
+  }
+ 
+  :root {
+    --primary: #004b8d;
+    --background: #f4f8fb;
+    --text: #333;
+    --weekend: #fff4b8;
+    --holiday: #f8caca;
+  }
+ 
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--background);
+    color: var(--text);
+    padding: 20px;
+  }
+ 
+  header {
+    background: var(--primary);
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+  }
+ 
+  h1 {
+    margin: 0;
+    font-size: 20px;
+  }
+ 
+  .btn-voltar {
+    background: #000333;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+ 
+  .form-section {
+    margin-top: 30px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .05);
+    overflow-x: auto;
+  }
+ 
+  .mes-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+ 
+  input[type="month"] {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+ 
+  table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+ 
+  th, td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+ 
+  td input[type="text"],
+  td input[type="time"],
+  td textarea {
+    padding: 5px;
+    font-size: 12px;
+  }
+ 
+  td input[type="text"]:read-only {
+    width: 60px; /* Reduz o campo "Total" */
+  }
+ 
+  td textarea {
+    width: 250px !important; /* Aumenta o campo "Atividades Realizadas" */
+    resize: vertical;
+  }
+ 
+  thead {
+    background: var(--primary);
+    color: #fff;
+  }
+ 
+  tr.weekend {
+    background: var(--weekend);
+  }
+ 
+  tr.holiday {
+    background: var(--holiday);
+  }
+ 
+  .btn-salvar {
+    margin-top: 20px;
+    background: #002f5e;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+ 
+  .btn-salvar:hover {  
+    background: #001f3d;
+  }
+ 
+  .linha-destacada {
+    background-color: #a8ffb9 !important;
+  }
+ 
+  .btn-duplicar,
+  .btn-excluir {
+    border: none;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+ 
+  .btn-duplicar {
+    background: #2ecc71;
+    font-size: 14px;
+  }
+ 
+  .btn-duplicar:hover {
+    background: #27ae60;
+  }
+ 
+  .btn-excluir {
+    background: #e74c3c;
+    font-size: 12px;
+    line-height: 1;
+  }
+ 
+  .btn-excluir:hover {
+    background: #c0392b;
+  }
+ 
+  .acoes-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Timesheet - Lançamentos</h1>
+    <button class="btn-voltar" onclick="voltarMenu()">Voltar ao Menu</button>
+  </header>
+ 
+  <div class="form-section">
+    <div class="mes-legenda-wrapper">
+      <div class="mes-wrapper">
+        <label for="mes">Selecione o mês:</label>
+        <input type="month" id="mes" onchange="gerarTabela()" />
+      </div>
+ 
+      <div class="legenda-status">
+        <div><span class="cor legenda-fimsemana"></span> Final de Semana</div>
+        <div><span class="cor legenda-feriado"></span> Feriado</div>
+        <div><span class="cor legenda-duplicado"></span> Linha Duplicada</div>
+      </div>
+    </div>
+ 
+    <div class="table-wrapper">
+      <table id="tabela-timesheet">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Dia</th>
+            <th>Cliente</th>
+            <th>Projeto</th>
+            <th>Início Manhã</th>
+            <th>Fim Manhã</th>
+            <th>Início Tarde</th>
+            <th>Fim Tarde</th>
+            <th>Total</th>
+            <th>Atividades Realizadas</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="10"><strong>Total do Mês</strong></td>
+            <td id="totalMensal">0:00</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+ 
+    <button class="btn-salvar" type="button" onclick="salvarApontamento()">Salvar Apontamento</button>
+  </div>
+ 
+<script>
+function voltarMenu() {
+  window.location.href = "inicio.html";
+}
+ 
+const feriadosFixos = ['01-01', '21-04', '01-05', '07-09', '12-10', '02-11', '15-11', '25-12'];
+ 
+function gerarTabela() {
+  const tbody = document.querySelector('#tabela-timesheet tbody');
+  tbody.innerHTML = '';
+  const mesAno = document.getElementById('mes').value;
+  if (!mesAno) return;
+ 
+  const [ano, mes] = mesAno.split('-').map(Number);
+  const dias = new Date(ano, mes, 0).getDate();
+  const feriados = [...feriadosFixos, ...calcularFeriadosMoveis(ano)];
+ 
+  for (let dia = 1; dia <= dias; dia++) {
+    const data = new Date(ano, mes - 1, dia);
+    const dataStr = data.toLocaleDateString('pt-BR');
+    const diaSemana = data.toLocaleDateString('pt-BR', { weekday: 'long' });
+    const mmdd = `${String(mes).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
+    const isFimDeSemana = data.getDay() === 0 || data.getDay() === 6;
+    const isFeriado = feriados.includes(mmdd);
+    let classe = isFeriado && isFimDeSemana ? 'holiday weekend' : isFeriado ? 'holiday' : isFimDeSemana ? 'weekend' : '';
+    const disabled = (isFimDeSemana || isFeriado) ? 'disabled' : '';
+ 
+tbody.insertAdjacentHTML('beforeend', `
+<tr class="${classe}">
+  <td>${dataStr}</td>
+  <td>${diaSemana}</td>
+  <td><input type="text" placeholder="Cliente"></td>
+  <td><input type="text" placeholder="Projeto"></td>
+  <td><input type="time" onchange="calcularHoras(this)" ${disabled}></td>
+  <td><input type="time" onchange="calcularHoras(this)" ${disabled}></td>
+  <td><input type="time" onchange="calcularHoras(this)" ${disabled}></td>
+  <td><input type="time" onchange="calcularHoras(this)" ${disabled}></td>
+  <td><input type="text" readonly></td>
+  <td><textarea placeholder="Descreva as atividades" rows="2" ${disabled}></textarea></td>
+  <td>
+    <div class="acoes-btns">
+      <button class="btn-duplicar" type="button" onclick="replicarLinha(this)" ${disabled}>+</button>
+      <button class="btn-excluir" type="button" onclick="excluirLinha(this)" ${disabled}>🗑</button>
+    </div>
+  </td>
+</tr>`);
+  }
+}
+ 
+function calcularHoras(input) {
+  const tr = input.closest('tr');
+  const horas = tr.querySelectorAll('input[type="time"]');
+  const totalField = tr.querySelector('td:nth-child(9) input');
+  let totalMin = 0;
+ 
+  for (let i = 0; i < horas.length; i += 2) {
+    const [inicio, fim] = [horas[i].value, horas[i + 1].value];
+    if (inicio && fim) {
+      const [h1, m1] = inicio.split(':').map(Number);
+      const [h2, m2] = fim.split(':').map(Number);
+      totalMin += (h2 * 60 + m2) - (h1 * 60 + m1);
+    }
+  }
+ 
+  totalField.value = totalMin > 0 ? `${Math.floor(totalMin / 60)}:${String(totalMin % 60).padStart(2, '0')}` : '';
+  calcularTotalMensal();
+}
+ 
+function calcularTotalMensal() {
+  let totalMin = 0;
+  document.querySelectorAll('#tabela-timesheet tbody tr').forEach(tr => {
+    const val = tr.querySelector('td:nth-child(9) input').value;
+    if (val) {
+      const [h, m] = val.split(':').map(Number);
+      totalMin += h * 60 + m;
+    }
+  });
+  document.getElementById('totalMensal').textContent = `${Math.floor(totalMin / 60)}:${String(totalMin % 60).padStart(2, '0')}`;
+}
+ 
+function calcularFeriadosMoveis(ano) {
+  const a = ano % 19, b = Math.floor(ano / 100), c = ano % 100;
+  const d = Math.floor(b / 4), e = b % 4;
+  const f = Math.floor((b + 8) / 25), g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4), k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const mesP = Math.floor((h + l - 7 * m + 114) / 31);
+  const diaP = ((h + l - 7 * m + 114) % 31) + 1;
+  const pascoa = new Date(ano, mesP - 1, diaP);
+  const carnaval = new Date(pascoa); carnaval.setDate(pascoa.getDate() - 47);
+  const sexta = new Date(pascoa); sexta.setDate(pascoa.getDate() - 2);
+  const corpus = new Date(pascoa); corpus.setDate(pascoa.getDate() + 60);
+  return [carnaval, sexta, corpus].map(d => `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`);
+}
+ 
+function replicarLinha(btn) {
+  if (!confirm("Deseja realmente duplicar esta linha?")) return;
+  const tr = btn.closest('tr');
+  const clone = tr.cloneNode(true);
+  clone.querySelectorAll('input[type="text"], input[type="time"], textarea').forEach(i => i.value = '');
+  clone.querySelector('td:nth-child(9) input').value = '';
+  clone.querySelector('.btn-duplicar').onclick = function () { replicarLinha(this) };
+  clone.querySelector('.btn-excluir').onclick = function () { excluirLinha(this) };
+  clone.classList.add('linha-destacada');
+  tr.after(clone);
+}
+ 
+function excluirLinha(btn) {
+  const tr = btn.closest('tr');
+  tr.remove();
+  calcularTotalMensal();
+}
+ 
+function salvarApontamento() {
+  alert('Apontamento salvo com sucesso!');
+}
+</script>
+</body>
+</html
+ 
