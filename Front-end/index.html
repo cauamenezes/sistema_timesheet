@@ -94,7 +94,7 @@
       <input type="password" name="senha" placeholder="Senha" required>
       <button type="submit">Entrar</button>
     </form>
-    <button onclick="showCadastro()">Cadastrar</button>
+    <!-- <button onclick="showCadastro()">Cadastrar</button> -->
     <span class="link" onclick="showRecuperarSenha()">Esqueceu a senha?</span>
   </div>
  
@@ -115,7 +115,7 @@
   <!-- Recuperar Senha -->
   <div id="recuperarSenha" class="container" style="display: none;">
     <h2>Recuperar Senha</h2>
-    <form action="recuperar.php" method="POST">
+    <form action="recuperar.js" method="POST">
       <input type="email" name="email" placeholder="Digite seu e-mail" required>
       <button type="submit">Enviar link de recuperação</button>
     </form>
@@ -128,10 +128,10 @@
       document.getElementById('loginConsultor').style.display = 'block';
     }
  
-    function showCadastro() {
-      hideAll();
-      document.getElementById('cadastro').style.display = 'block';
-    }
+    // function showCadastro() {
+    //   hideAll();
+    //   document.getElementById('cadastro').style.display = 'block';
+    // }
  
     function showRecuperarSenha() {
       hideAll();
@@ -150,7 +150,7 @@
       const senha = document.querySelector('[name="senha"]').value;
  
       if (usuario && senha) {
-        window.location.href = "menu/index.html";
+        window.location.href = "menu-principal.html";
       } else {
         alert("Usuário ou senha inválidos.");
       }
