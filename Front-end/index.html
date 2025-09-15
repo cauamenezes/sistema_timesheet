@@ -1,167 +1,224 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sistema Timesheet</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: url('https://i.imgur.com/9rgDfWq.png') no-repeat center center fixed;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
- 
-    h1, h2 {
-      color: #e0e0e0;
-      margin-bottom: 10px;
-      text-align: center;
-    }
- 
-    .container {
-      background-color: rgb(37, 44, 104);
-      padding: 30px 40px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 320px;
-    }
- 
-    input[type="text"], input[type="password"], input[type="email"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ff98e7;
-      border-radius: 8px;
-    }
- 
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #4786aa;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
- 
-    button:hover {
-      background-color: #3a6e8b;
-    }
- 
-    .back-button {
-      background-color: #ccc;
-      color: #333;
-    }
- 
-    .back-button:hover {
-      background-color: #bbb;
-    }
- 
-    .link {
-      display: block;
-      text-align: center;
-      margin-top: 10px;
-      color: #ffffffaf;
-      text-decoration: none;
-      font-size: 14px;
-      cursor: pointer;
-    }
- 
-    .link:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
- 
-  <!-- Login direto -->
-  <div id="loginConsultor" class="container">
-    <h2>Login</h2>
-    <form onsubmit="entrar(event)">
-      <input type="text" name="usuario" placeholder="Usuário" required>
-      <input type="password" name="senha" placeholder="Senha" required>
-      <button type="submit">Entrar</button>
-    </form>
-    <!-- <button onclick="showCadastro()">Cadastrar</button> -->
-    <span class="link" onclick="showRecuperarSenha()">Esqueceu a senha?</span>
-  </div>
- 
-  <!-- Cadastro -->
-  <div id="cadastro" class="container" style="display: none;">
-    <h2>Cadastro</h2>
-    <form action="cadastrar.php" method="POST">
-      <input type="text" name="nome" placeholder="Nome completo" required>
-      <input type="email" name="email" placeholder="E-mail" required>
-      <input type="text" name="usuario" placeholder="Usuário" required>
-      <input type="password" name="senha" placeholder="Senha" required>
-      <input type="password" name="confirmar_senha" placeholder="Confirmar senha" required>
-      <button type="submit">Cadastrar</button>
-    </form>
-    <button class="back-button" onclick="showLogin()">Voltar</button>
-  </div>
- 
-  <!-- Recuperar Senha -->
-  <div id="recuperarSenha" class="container" style="display: none;">
-    <h2>Recuperar Senha</h2>
-    <form action="recuperar.js" method="POST">
-      <input type="email" name="email" placeholder="Digite seu e-mail" required>
-      <button type="submit">Enviar link de recuperação</button>
-    </form>
-    <button class="back-button" onclick="showLogin()">Voltar</button>
-  </div>
- 
-  <script>
-    function showLogin() {
-      hideAll();
-      document.getElementById('loginConsultor').style.display = 'block';
-    }
- 
-    // function showCadastro() {
-    //   hideAll();
-    //   document.getElementById('cadastro').style.display = 'block';
-    // }
- 
-    function showRecuperarSenha() {
-      hideAll();
-      document.getElementById('recuperarSenha').style.display = 'block';
-    }
- 
-    function hideAll() {
-      document.getElementById('loginConsultor').style.display = 'none';
-      document.getElementById('cadastro').style.display = 'none';
-      document.getElementById('recuperarSenha').style.display = 'none';
-    }
- 
-    function entrar(event) {
-      event.preventDefault();
-      const usuario = document.querySelector('[name="usuario"]').value;
-      const senha = document.querySelector('[name="senha"]').value;
- 
-      if (usuario && senha) {
-        window.location.href = "menu-principal.html";
-      } else {
-        alert("Usuário ou senha inválidos.");
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema Timesheet</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: url("img/background.png") no-repeat center center fixed;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
       }
-    }
-// Se tiver ?voltar=1 na URL, mostrar tela de login
-if (window.location.search.includes('voltar=1')) {
-  showLogin();
-}
- 
-  </script>
- 
- 
-</body>
+
+      h1,
+      h2 {
+        color: #e0e0e0;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .container {
+        background-color: rgb(37, 44, 104);
+        padding: 30px 40px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 320px;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ff98e7;
+        border-radius: 8px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4786aa;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      button:hover {
+        background-color: #3a6e8b;
+      }
+
+      .back-button {
+        background-color: #ccc;
+        color: #333;
+      }
+
+      .back-button:hover {
+        background-color: #bbb;
+      }
+
+      .link {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        color: #ffffffaf;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Login direto -->
+    <div id="loginConsultor" class="container">
+      <h2>Login</h2>
+      <form onsubmit="entrar(event)">
+        <input type="text" name="usuario" placeholder="Usuário" required />
+        <input type="password" name="senha" placeholder="Senha" required />
+        <button type="submit">Entrar</button>
+      </form>
+      <!-- <button onclick="showCadastro()">Cadastrar</button> -->
+      <span class="link" onclick="showRecuperarSenha()">Esqueceu a senha?</span>
+    </div>
+
+    <!-- Cadastro -->
+    <div id="cadastro" class="container" style="display: none">
+      <h2>Cadastro</h2>
+      <form action="cadastrar.php" method="POST">
+        <input type="text" name="nome" placeholder="Nome completo" required />
+        <input type="email" name="email" placeholder="E-mail" required />
+        <input type="text" name="usuario" placeholder="Usuário" required />
+        <input type="password" name="senha" placeholder="Senha" required />
+        <input
+          type="password"
+          name="confirmar_senha"
+          placeholder="Confirmar senha"
+          required
+        />
+        <button type="submit">Cadastrar</button>
+      </form>
+      <button class="back-button" onclick="showLogin()">Voltar</button>
+    </div>
+
+    >
+    <!-- Recuperar Senha -->
+    <div id="recuperarSenha" class="container" style="display: none">
+      <h2>Recuperar Senha</h2>
+      <form onsubmit="recuperarSenha(event)">
+        <input
+          type="email"
+          name="email"
+          placeholder="Digite seu e-mail"
+          required
+        />
+        <button type="submit">Enviar link de recuperação</button>
+      </form>
+      <button class="back-button" onclick="showLogin()">Voltar</button>
+    </div>
+
+    <script>
+      async function entrar(event) {
+        event.preventDefault();
+        const usuario = document.querySelector('[name="usuario"]').value;
+        const senha = document.querySelector('[name="senha"]').value;
+
+        try {
+          // 🔥 Chamada ao back-end (troca URL se for Railway, tipo https://meuapp.up.railway.app)
+          const res = await fetch("http://localhost:3000/auth/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: usuario, // no back o login é por email
+              senha: senha,
+            }),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            alert(data.error || "Erro ao fazer login");
+            return;
+          }
+
+          // Salvar token e dados do usuário
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data));
+
+          // Redirecionar para o menu
+          window.location.href = "menu-principal.html";
+        } catch (err) {
+          console.error(err);
+          alert("Erro de conexão com o servidor");
+        }
+      }
+
+      function showLogin() {
+        hideAll();
+        document.getElementById("loginConsultor").style.display = "block";
+      }
+
+      function showRecuperarSenha() {
+        hideAll();
+        document.getElementById("recuperarSenha").style.display = "block";
+      }
+
+      function hideAll() {
+        document.getElementById("loginConsultor").style.display = "none";
+        document.getElementById("cadastro").style.display = "none";
+        document.getElementById("recuperarSenha").style.display = "none";
+      }
+
+      async function recuperarSenha(event) {
+        event.preventDefault();
+        const email = document.querySelector(
+          '#recuperarSenha [name="email"]'
+        ).value;
+
+        try {
+          const res = await fetch("http://localhost:3000/auth/recover", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email }),
+          });
+          const data = await res.json();
+
+          if (res.ok) {
+            alert("Se o e-mail existir, um link de recuperação foi enviado!");
+            showLogin();
+          } else {
+            alert(data.error || "Erro ao solicitar recuperação");
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Falha na comunicação com o servidor");
+        }
+      }
+
+      // Se tiver ?voltar=1 na URL, mostrar tela de login
+      if (window.location.search.includes("voltar=1")) {
+        showLogin();
+      }
+    </script>
+  </body>
 </html>
