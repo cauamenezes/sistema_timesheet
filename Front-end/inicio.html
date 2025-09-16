@@ -1,74 +1,88 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página Simples</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f8fb;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
- 
-    .header {
-      background-color: #004b8d;
-      color: white;
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
- 
-    .header h1 {
-      font-size: 20px;
-      margin: 0;
-    }
- 
-    .btn-sair {
-      background-color: #e74c3c;
-      border: none;
-      color: white;
-      padding: 10px 18px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background 0.3s ease;
-    }
- 
-    .btn-sair:hover {
-      background-color: #c0392b;
-    }
- 
-    .content {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-    }
- 
-    .logo {
-      max-width: 300px;
-      width: 100%;
-      margin-bottom: 20px;
-    }
-  </style>
-</head>
-<body>
-  <div class="header">
-    <h1>Página Simples  </h1>
-    <button class="btn-sair" onclick="window.top.location.href = 'index.html?voltar=1';">Sair</button>
-  </div>
- 
-  <div class="content">
-    <img src="img/logo-cidic-inicio.png" alt="Logo da Empresa" class="logo">
-    <p>Bem-vindo!</p>
-  </div>
- 
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página Simples</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f4f8fb;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      .header {
+        background-color: #004b8d;
+        color: white;
+        padding: 16px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header h1 {
+        font-size: 20px;
+        margin: 0;
+      }
+
+      .btn-sair {
+        background-color: #e74c3c;
+        border: none;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s ease;
+      }
+
+      .btn-sair:hover {
+        background-color: #c0392b;
+      }
+
+      .content {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .logo {
+        max-width: 300px;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    </style>
+
+    <script>
+      // Verifica se tem token salvo
+      const token = localStorage.getItem("token");
+      if (!token) {
+        // Se não tiver token, volta pro login
+        window.location.href = "index.html?voltar=1";
+      }
+
+      function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.top.location.href = "index.html?voltar=1";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Página Simples</h1>
+      <button class="btn-sair" onclick="logout()">Sair</button>
+    </div>
+
+    <div class="content">
+      <img src="img/logo-cidic-inicio.png" alt="Logo da Empresa" class="logo" />
+      <p>Bem-vindo!</p>
+    </div>
+  </body>
 </html>

@@ -6,6 +6,7 @@
   <title>Menu Principal - CIDIC CONSULTORIA EM T.I</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
     * {
       margin: 0;
@@ -82,7 +83,19 @@
       font-size: 13px;
     }
   </style>
+
+<script>
+    // 🔒 Verifica se o usuário está logado
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "index.html?voltar=1";
+    }
+  </script>
+
 </head>
+
+ 
+
 <body>
   <aside>
     <a href="https://cidic.com.br" target="_blank">

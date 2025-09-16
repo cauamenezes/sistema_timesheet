@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "CIDIC Consultoria em TI",
@@ -18,5 +19,8 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.14.3",
     "nodemailer": "^7.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

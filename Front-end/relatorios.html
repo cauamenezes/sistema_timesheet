@@ -76,7 +76,16 @@
       background-color: #f1f1f1;
     }
   </style>
+
+  <script>
+    // 🔒 Verifica se o usuário está logado
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "index.html?voltar=1";
+    }
+  </script>
 </head>
+
 <body>
   <header>Relatórios - Timesheet</header>
   <div class="container">
