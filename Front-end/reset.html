@@ -1,42 +1,114 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Redefinir Senha</title>
-</head>
-<body>
-  <h2>Redefinir Senha</h2>
-  <form onsubmit="resetarSenha(event)">
-    <input type="password" name="senha" placeholder="Nova senha" required>
-    <button type="submit">Redefinir</button>
-  </form>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redefinir Senha</title>
 
-  <script>
-    async function resetarSenha(event) {
-      event.preventDefault();
-      const urlParams = new URLSearchParams(window.location.search);
-      const token = urlParams.get("token");
-      const novaSenha = document.querySelector('[name="senha"]').value;
-
-      try {
-        const res = await fetch("http://localhost:3000/auth/reset", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token, novaSenha }),
-        });
-        const data = await res.json();
-
-        if (res.ok) {
-          alert("Senha redefinida com sucesso!");
-          window.location.href = "index.html?voltar=1";
-        } else {
-          alert(data.error || "Erro ao redefinir senha");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Falha na comunicação com o servidor");
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: url("img/background.png") no-repeat center center fixed;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
       }
-    }
-  </script>
-</body>
+
+      h1,
+      h2 {
+        color: #e0e0e0;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .container {
+        background-color: rgb(37, 44, 104);
+        padding: 30px 40px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 320px;
+      }
+
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ff98e7;
+        border-radius: 8px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4786aa;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      button:hover {
+        background-color: #3a6e8b;
+      }
+
+      .back-button {
+        background-color: #ccc;
+
+        color: #333;
+      }
+
+      .back-button:hover {
+        background-color: #bbb;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Redefinir Senha</h2>
+      <form onsubmit="resetarSenha(event)">
+        <input type="password" name="senha" placeholder="Nova senha" required />
+        <button type="submit">Redefinir</button>
+      </form>
+      <button class="back-button" onclick="voltarLogin()">Voltar</button>
+    </div>
+
+    <script>
+      async function resetarSenha(event) {
+        event.preventDefault();
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get("token");
+        const novaSenha = document.querySelector('[name="senha"]').value;
+
+        try {
+          const res = await fetch("http://localhost:3000/auth/reset", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token, novaSenha }),
+          });
+          const data = await res.json();
+
+          if (res.ok) {
+            alert("Senha redefinida com sucesso!");
+            window.location.href = "index.html?voltar=1";
+          } else {
+            alert(data.error || "Erro ao redefinir senha");
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Falha na comunicação com o servidor");
+        }
+      }
+    </script>
+  </body>
 </html>
