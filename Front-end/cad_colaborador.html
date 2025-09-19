@@ -7,13 +7,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
     <script>
-    // 🔒 Verifica se o usuário está logado
-    const token = localStorage.getItem("token");
-    if (!token) {
-      window.location.href = "index.html?voltar=1";
-    }
-  </script>
+      // 🔒 Verifica se o usuário está logado
+      const token = localStorage.getItem("token");
+      if (!token) {
+        window.location.href = "index.html?voltar=1";
+      }
+    </script>
   </head>
 
   <style>
@@ -205,7 +206,7 @@
     <div class="form-row">
       <div>
         <label for="tipo_perfil">Tipo de perfil:</label>
-        <select id="tipo_perfil" style="max-width: 120px">
+        <select id="tipo_perfil" style="max-width: 120px" required>
           <option value="" disabled selected>Selecione</option>
           <option value="consultor">Consultor</option>
           <option value="adm">Adminstrador</option>
@@ -216,7 +217,7 @@
     <div class="form-row">
       <div>
         <label for="nome">Nome completo:</label>
-        <input type="text" id="nome" placeholder="Nome completo" />
+        <input type="text" id="nome" placeholder="Nome completo" required />
       </div>
 
       <div>
@@ -247,12 +248,17 @@
 
       <div>
         <label for="email">E-mail:</label>
-        <input type="email" id="email" placeholder="exemplo@email.com" />
+        <input
+          type="email"
+          id="email"
+          placeholder="exemplo@email.com"
+          required
+        />
       </div>
 
       <div>
         <label for="senha">Senha:</label>
-        <input type="password" id="senha" placeholder="Senha" />
+        <input type="password" id="senha" placeholder="Senha" required />
       </div>
 
       <div>
@@ -581,7 +587,7 @@
           bairro: document.getElementById("bairro").value,
           cidade: document.getElementById("cidade").value,
           estado: document.getElementById("estado").value,
-          
+
           // Empresa
           NomeFantasia: document.getElementById("NomeFantasia").value,
           CNPJ: document.getElementById("CNPJ").value,
@@ -614,14 +620,17 @@
         };
 
         try {
-          const res = await fetch("http://localhost:3000/cadastroColaboradores", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": "Bearer " + localStorage.getItem("token")
-            },
-            body: JSON.stringify(colaborador),
-          });
+          const res = await fetch(
+            "http://localhost:3000/colaboradores/cadastro",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+              body: JSON.stringify(colaborador),
+            }
+          );
 
           const data = await res.json();
           if (res.ok) {
@@ -636,6 +645,7 @@
           alert("Erro ao salvar colaborador");
         }
       }
+
     </script>
   </div>
 </html>
