@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clientes - Timesheet</title>
+  <title>Colaboradores - Timesheet</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -80,11 +80,10 @@
   </style>
 </head>
 <body>
-  <header>Clientes - Timesheet</header>
+  <header>Colaboradores - Timesheet</header>
   <div class="container">
     <div class="buttons">
-      <!-- Botão para abrir cliente.html -->
-      <button onclick="adicionarCliente()">+ Novo Cliente</button>
+      <button onclick="adicionarColaborador()">+ Novo Colaborador</button>
     </div>
 
     <table>
@@ -92,27 +91,27 @@
         <tr>
           <th>Nome</th>
           <th>Email</th>
-          <th>Telefone</th>
+          <th>Usuário</th>
           <th>Ações</th>
         </tr>
       </thead>
-      <tbody id="tabela-clientes">
+      <tbody id="tabela-colaboradores">
         <tr>
-          <td>Empresa X</td>
-          <td>contato@empresa-x.com</td>
-          <td>(11) 4002-8922</td>
+          <td>Ana Souza</td>
+          <td>ana.souza@email.com</td>
+          <td>ana.souza</td>
           <td>
-            <button class="icon-btn edit-icon" onclick="editarCliente('Empresa X')">✏️</button>
-            <button class="icon-btn delete-icon" onclick="excluirCliente('Empresa X')">🗑️</button>
+            <button class="icon-btn edit-icon" onclick="editarColaborador('Ana Souza')">✏️</button>
+            <button class="icon-btn delete-icon" onclick="excluirColaborador('Ana Souza')">🗑️</button>
           </td>
         </tr>
         <tr>
-          <td>Empresa Y</td>
-          <td>atendimento@empresa-y.com</td>
-          <td>(21) 99887-6655</td>
+          <td>João Silva</td>
+          <td>joao.silva@email.com</td>
+          <td>joao.silva</td>
           <td>
-            <button class="icon-btn edit-icon" onclick="editarCliente('Empresa Y')">✏️</button>
-            <button class="icon-btn delete-icon" onclick="excluirCliente('Empresa Y')">🗑️</button>
+            <button class="icon-btn edit-icon" onclick="editarColaborador('João Silva')">✏️</button>
+            <button class="icon-btn delete-icon" onclick="excluirColaborador('João Silva')">🗑️</button>
           </td>
         </tr>
       </tbody>
@@ -120,20 +119,17 @@
   </div>
 
   <script>
-    function adicionarCliente() {
-      // abre cliente.html
-      window.location.href = "cliente.html";
+    function adicionarColaborador() {
+      window.location.href = "cad_colaborador.html";
     }
 
-    function editarCliente(nome) {
-      alert("Editar cliente: " + nome);
-      // aqui você pode redirecionar também para cliente.html com dados do cliente
+    function editarColaborador(nome) {
+      alert("Editar cadastro de: " + nome);
     }
 
-    function excluirCliente(nome) {
-      if (confirm("Deseja realmente excluir o cliente " + nome + "?")) {
-        alert("Cliente " + nome + " excluído!");
-        // aqui entraria a chamada para excluir no backend
+    function excluirColaborador(nome) {
+      if (confirm("Deseja realmente excluir " + nome + "?")) {
+        alert("Colaborador " + nome + " excluído!");
       }
     }
   </script>
