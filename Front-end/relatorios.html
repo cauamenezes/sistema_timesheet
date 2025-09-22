@@ -75,6 +75,35 @@
     table tbody tr:hover {
       background-color: #f1f1f1;
     }
+
+    header {
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      .btn-sair {
+        background-color: #e74c3c;
+        border: none;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s ease;
+      }
+
+      .btn-sair:hover {
+        background-color: #c0392b;
+      }
   </style>
 
   <script>
@@ -87,7 +116,10 @@
 </head>
 
 <body>
-  <header>Relatórios - Timesheet</header>
+  <header>
+    <h1>Relatórios - Timesheet</h1>
+    <button class="btn-sair" onclick="logout()">Sair</button>
+  </header>
   <div class="container">
     <div class="filters">
       <select id="consultor-select">
@@ -108,7 +140,7 @@
         <button>Exportar PDF</button>
         <button>Exportar Excel</button>
         <button>Imprimir</button>
-      </div>''
+      </div>
     </div>
  
     <table>
@@ -148,5 +180,13 @@
       </tbody>
     </table>
   </div>
+
+  <script>
+    function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.top.location.href = "index.html?voltar=1";
+      }
+  </script>
 </body>
 </html>

@@ -1,399 +1,515 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-br">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dados Cliente</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-<style>
-  :root {
-    --primary: #004b8d;
-    --secondary: #a3488a;
-    --background-light: #f4f8fb;
-    --text-light: #333;
-    --card-bg-light: #fff;
-    --weekend-bg: #ffdd57;
-    --holiday-bg: #ff5c5c;
-  }
- 
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: var(--background-light);
-    color: var(--text-light);
-    padding: 20px;
-    margin: 0;
-  }
- 
-  header {
-    background-color: var(--primary);
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
- 
-  header h1 {
-    margin: 0;
-    font-size: 22px;
-  }
- 
-  .btn-sair {
-    background-color: #000000;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
- 
-  .btn-sair:hover {
-    background-color: #000000;
-  }
- 
-  h2 {
-    color: var(--primary);
-    font-size: 16px;
-    font-weight: normal;
-  }
- 
-  h2:first-of-type {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--primary);
-  }
- 
-  .input-group label,
-  .form-row label {
-    font-weight: normal;
-    font-size: 13px;
-    color: #444;
-    display: block;
-    margin-bottom: 4px;
-  }
- 
-  .form-row input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    width: 100%;
-    box-sizing: border-box;
-  }
- 
-  .form-section {
-    background-color: var(--card-bg-light);
-    border: 1px solid #bbb;
-    border-radius: 10px;
-    padding: 20px 25px;
-    margin-bottom: 20px;
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.05);
-  }
- 
-  .form-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 16px;
-  }
- 
-  .form-row > div {
-    flex: 1 1 200px;
-    min-width: 180px;
-  }
- 
-  .btn {
-    margin: 10px 5px;
-    padding: 10px 20px;
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
- 
-  .tabela-projetos {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #ccc;
-  }
- 
-  .tabela-projetos th,
-  .tabela-projetos td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    vertical-align: middle;
-  }
- 
-  .col-projeto       { width: 20%; }
-  .col-responsavel   { width: 18%; }
-  .col-email-aprov   { width: 22%; }
-  .col-data          { width: 12%; }
-  .col-email-fat     { width: 20%; }
-  .col-status        { width: 10%; }
-  .col-remover       { width: auto; text-align: center; }
- 
-  .input-full {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 6px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
- 
-  .btn-remover {
-    background: none;
-    border: none;
-    color: #e74c3c;
-    font-size: 13px;
-    cursor: pointer;
-  }
- 
-  .btn-remover:hover {
-    text-decoration: underline;
-  }
- 
-  .status-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
- 
-  .status-badge {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 8px;
-    display: inline-block;
-  }
- 
-  .status-ativo { background-color: green; }
-  .status-inativo { background-color: red; }
- 
-  .status-select {
-    padding-left: 6px;
-    appearance: none;
-    background: transparent;
-    border: none;
-    font-size: 13px;
-    color: #333;
-  }
- 
-  .status-select:focus {
-    outline: none;
-  }
-</style>
-</head>
-<body>
-<header>
-  <h1>Bem-vindo ao Painel do Consultor</h1>
-  <div style="display: flex; gap: 10px;">
-    <!-- Botão Voltar ao Menu -->
-    <button onclick="window.location.href='inicio.html'"
-            style="
-              padding: 10px 20px;
-              background-color: #000000;
-              color: rgb(255, 255, 255);
-              border: none;
-              border-radius: 8px;
-              font-size: 16px;
-              cursor: pointer;
-              transition: background-color 0.3s ease;
-              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            "
-            onmouseover="this.style.backgroundColor='#222'"
-            onmouseout="this.style.backgroundColor='#000000'">
-      Voltar ao Menu
-    </button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dados Cliente - Timesheet</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <style>
+      :root {
+        --primary: #004b8d;
+        --secondary: #a3488a;
+        --background-light: #f4f8fb;
+        --text-light: #333;
+        --card-bg-light: #fff;
+        --weekend-bg: #ffdd57;
+        --holiday-bg: #ff5c5c;
+      }
 
-    <!-- Botão Projetos -->
-    <button onclick="window.location.href='projeto.html'"
-            style="
-              padding: 10px 20px;
-              background-color: var(--secondary);
-              color: white;
-              border: none;
-              border-radius: 8px;
-              font-size: 16px;
-              cursor: pointer;
-              transition: background-color 0.3s ease;
-              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            "
-            onmouseover="this.style.backgroundColor='#8a2b88'"
-            onmouseout="this.style.backgroundColor='var(--secondary)'">
-      Projetos
-    </button>
-  </div>
-</header>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: var(--background-light);
+        color: var(--text-light);
+        margin: 0;
+      }
 
-<h2>CIDIC CONSULTORIA EM T.I</h2>
+      header {
+        background-color: var(--primary);
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-<!--Dados Empresa -->
-<div class="form-section">
-<h2>Dados Cliente:</h2>
-<div class="form-row">
-<div>
-<label for="NomeFantasia">Nome Fantasia:</label>
-<input type="text" id="NomeFantasia" placeholder="Nome comercial">
-</div>
-</div>
-<div class="form-row">
-<div>
-<label for="CNPJ">CNPJ:</label>
-<input type="text" id="CNPJ" placeholder="CNPJ da empresa">
-</div>
-<div>
-<label for="InscricaoEstadual">Inscrição Estadual:</label>
-<input type="text" id="InscricaoEstadual" placeholder="Inscrição Estadual">
-</div>
-<div>
-<label for="InscricaoMunicipal">Inscrição Municipal:</label>
-<input type="text" id="InscricaoMunicipal" placeholder="Inscrição Municipal">
-</div>
-<div>
-<label for="RegimeTributario">Regime Tributário:</label>
-<input type="text" id="RegimeTributario" placeholder="Regime Tributário">
-</div>
-<div>
-<label for="CEP_Empresa">CEP:</label>
-<input type="text" id="CEP_Empresa" placeholder="CEP" style="max-width: 120px;">
-</div>
-</div>
-<div class="form-row">
-<div>
-<label for="LogradouroEmpresa">Logradouro:</label>
-<input type="text" id="LogradouroEmpresa" placeholder="Rua, Avenida, etc.">
-</div>
-<div>
-<label for="NumeroEmpresa">Número:</label>
-<input type="text" id="NumeroEmpresa" placeholder="Nº">
-</div>
-<div>
-<label for="ComplementoEmpresa">Complemento:</label>
-<input type="text" id="ComplementoEmpresa" placeholder="Apto, bloco, etc.">
-</div>
-<div>
-<label for="BairroEmpresa">Bairro:</label>
-<input type="text" id="BairroEmpresa" placeholder="Bairro">
-</div>
-</div>
-<div class="form-row">
-<div>
-<label for="CidadeEmpresa">Cidade:</label>
-<input type="text" id="CidadeEmpresa" placeholder="Cidade">
-</div>
-<div>
-<label for="EstadoEmpresa">Estado:</label>
-<select id="EstadoEmpresa" style="max-width: 120px;">
-<option value="" disabled selected>Selecione</option>
-<option value="SP">SP</option>
-<option value="RJ">RJ</option>
-<option value="MG">MG</option>
-</select>
-</div>
-<div>
-<label for="PaisEmpresa">País:</label>
-<input type="text" id="PaisEmpresa" placeholder="País" value="Brasil">
-</div>
-</div>
-<div class="form-row">
-<div>
-<label for="TelefoneFixoEmpresa">Telefone Fixo:</label>
-<input type="text" id="TelefoneFixoEmpresa" placeholder="(XX) XXXX-XXXX">
-</div>
-<div>
-<label for="TelefoneCelularEmpresa">Telefone Celular:</label>
-<input type="text" id="TelefoneCelularEmpresa" placeholder="(XX) XXXXX-XXXX">
-</div>
-<div>
-<label for="EmailCorporativoEmpresa">E-mail Corporativo:</label>
-<input type="email" id="EmailCorporativoEmpresa" placeholder="empresa@email.com">
-</div>
-</div>
-</div>
+      header h1 {
+        margin: 0;
+        font-size: 20px;
+      }
 
-<script>
-  function salvarDados() {
-    alert("Dados salvos com sucesso!");
-  }
+      .btn-sair {
+        background-color: #000000;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
 
-  function voltar() {
-    window.history.back();
-  }
-  
-  function atualizarStatusVisual(select) {
-    const badge = select.parentElement.querySelector('.status-badge');
-    badge.className = 'status-badge';
+      .btn-sair:hover {
+        background-color: #000000;
+      }
 
-    if (select.value === 'ativo') {
-      badge.classList.add('status-ativo');
-    } else {
-      badge.classList.add('status-inativo');
-    }
-  }
+      h2 {
+        color: var(--primary);
+        font-size: 16px;
+        font-weight: normal;
+        margin: 20px;
+      }
 
-  function aplicarCorStatus() {
-    document.querySelectorAll('.status-select').forEach(select => {
-      atualizarStatusVisual(select);
-    });
-  }
+      h2:first-of-type {
+        font-size: 20px;
+        font-weight: bold;
+        color: var(--primary);
+      }
 
-  function adicionarLinha() {
-    const tabela = document.getElementById('tabelaProjetos').getElementsByTagName('tbody')[0];
-    const novaLinha = tabela.insertRow();
+      .input-group label,
+      .form-row label {
+        font-weight: normal;
+        font-size: 13px;
+        color: #444;
+        display: block;
+        margin-bottom: 4px;
+      }
 
-    const campos = [
-      '<input type="text" class="input-full" placeholder="Projeto X">',
-      '<input type="text" class="input-full" placeholder="Responsável">',
-      '<input type="email" class="input-full" placeholder="email@aprovador.com">',
-      '<input type="date" class="input-full">',
-      '<input type="email" class="input-full" placeholder="email@financeiro.com">',
-      `<div class="status-wrapper">
-         <span class="status-badge status-inativo"></span>
-         <select class="status-select input-full" onchange="atualizarStatusVisual(this)">
-           <option value="inativo" selected>Inativo</option>
-           <option value="ativo">Ativo</option>
-         </select>
-       </div>`,
-      `<button onclick="removerLinha(this)" class="btn-remover">Remover</button>`
-    ];
+      .form-row input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        width: 100%;
+        box-sizing: border-box;
+      }
 
-    campos.forEach(html => {
-      const cell = novaLinha.insertCell();
-      cell.innerHTML = html;
-    });
+      .form-section {
+        background-color: var(--card-bg-light);
+        border: 1px solid #bbb;
+        border-radius: 10px;
+        padding: 20px 25px;
+        box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.05);
+        margin: 20px;
+      }
 
-    aplicarCorStatus();
-  }
+      .form-section h2 {
+        margin-left: 0px;
+      }
 
-  function removerLinha(botao) {
-    const linha = botao.closest('tr');
-    linha.remove();
-  }
+      .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 16px;
+      }
 
-  function salvarTabela() {
-    const dados = [];
-    const linhas = document.querySelectorAll('#tabelaProjetos tbody tr');
+      .form-row > div {
+        flex: 1 1 200px;
+        min-width: 180px;
+      }
 
-    linhas.forEach(linha => {
-      const inputs = linha.querySelectorAll('input');
-      const status = linha.querySelector('select');
-      dados.push({
-        projeto: inputs[0].value,
-        responsavel: inputs[1].value,
-        emailAprovacao: inputs[2].value,
-        dataFaturamento: inputs[3].value,
-        emailFaturamento: inputs[4].value,
-        status: status.value
-      });
-    });
+      .btn {
+        margin: 10px 5px;
+        padding: 10px 20px;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
 
-    console.log("📥 Dados salvos:", dados);
-    alert("Dados salvos com sucesso! Veja no console.");
-  }
+      .tabela-projetos {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #ccc;
+      }
 
-  aplicarCorStatus();
-</script>
-</body>
+      .tabela-projetos th,
+      .tabela-projetos td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        vertical-align: middle;
+      }
+
+      .col-projeto {
+        width: 20%;
+      }
+      .col-responsavel {
+        width: 18%;
+      }
+      .col-email-aprov {
+        width: 22%;
+      }
+      .col-data {
+        width: 12%;
+      }
+      .col-email-fat {
+        width: 20%;
+      }
+      .col-status {
+        width: 10%;
+      }
+      .col-remover {
+        width: auto;
+        text-align: center;
+      }
+
+      .input-full {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 6px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+
+      .btn-remover {
+        background: none;
+        border: none;
+        color: #e74c3c;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      .btn-remover:hover {
+        text-decoration: underline;
+      }
+
+      .status-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .status-badge {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 8px;
+        display: inline-block;
+      }
+
+      .status-ativo {
+        background-color: green;
+      }
+      .status-inativo {
+        background-color: red;
+      }
+
+      .status-select {
+        padding-left: 6px;
+        appearance: none;
+        background: transparent;
+        border: none;
+        font-size: 13px;
+        color: #333;
+      }
+
+      .status-select:focus {
+        outline: none;
+      }
+
+      .btn-sair {
+        background-color: #e74c3c;
+        border: none;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s ease;
+      }
+
+      .btn-sair:hover {
+        background-color: #c0392b;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Dados Cliente - Timesheet</h1>
+      <div style="display: flex; gap: 10px">
+        <!-- Botão Projetos -->
+        <button
+          onclick="window.location.href='projeto.html'"
+          style="
+            padding: 10px 20px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          "
+          onmouseover="this.style.backgroundColor='#8a2b88'"
+          onmouseout="this.style.backgroundColor='var(--secondary)'"
+        >
+          Projetos
+        </button>
+
+        <button class="btn-sair" onclick="logout()">Sair</button>
+      </div>
+    </header>
+
+    <h2>CIDIC CONSULTORIA EM T.I</h2>
+
+    <!--Dados Empresa -->
+    <div class="form-section">
+      <h2>Dados Cliente:</h2>
+      <div class="form-row">
+        <div>
+          <label for="NomeFantasia">Nome Fantasia:</label>
+          <input type="text" id="NomeFantasia" placeholder="Nome comercial" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="CNPJ">CNPJ:</label>
+          <input type="text" id="CNPJ" placeholder="CNPJ da empresa" />
+        </div>
+        <div>
+          <label for="InscricaoEstadual">Inscrição Estadual:</label>
+          <input
+            type="text"
+            id="InscricaoEstadual"
+            placeholder="Inscrição Estadual"
+          />
+        </div>
+        <div>
+          <label for="InscricaoMunicipal">Inscrição Municipal:</label>
+          <input
+            type="text"
+            id="InscricaoMunicipal"
+            placeholder="Inscrição Municipal"
+          />
+        </div>
+        <div>
+          <label for="RegimeTributario">Regime Tributário:</label>
+          <input
+            type="text"
+            id="RegimeTributario"
+            placeholder="Regime Tributário"
+          />
+        </div>
+        <div>
+          <label for="CEP_Empresa">CEP:</label>
+          <input
+            type="text"
+            id="CEP_Empresa"
+            placeholder="CEP"
+            style="max-width: 120px"
+          />
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="LogradouroEmpresa">Logradouro:</label>
+          <input
+            type="text"
+            id="LogradouroEmpresa"
+            placeholder="Rua, Avenida, etc."
+          />
+        </div>
+        <div>
+          <label for="NumeroEmpresa">Número:</label>
+          <input type="text" id="NumeroEmpresa" placeholder="Nº" />
+        </div>
+        <div>
+          <label for="ComplementoEmpresa">Complemento:</label>
+          <input
+            type="text"
+            id="ComplementoEmpresa"
+            placeholder="Apto, bloco, etc."
+          />
+        </div>
+        <div>
+          <label for="BairroEmpresa">Bairro:</label>
+          <input type="text" id="BairroEmpresa" placeholder="Bairro" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="CidadeEmpresa">Cidade:</label>
+          <input type="text" id="CidadeEmpresa" placeholder="Cidade" />
+        </div>
+        <div>
+          <label for="EstadoEmpresa">Estado:</label>
+          <select id="EstadoEmpresa" style="max-width: 120px">
+            <option value="" disabled selected>Selecione</option>
+            <option value="SP">SP</option>
+            <option value="RJ">RJ</option>
+            <option value="MG">MG</option>
+          </select>
+        </div>
+        <div>
+          <label for="PaisEmpresa">País:</label>
+          <input
+            type="text"
+            id="PaisEmpresa"
+            placeholder="País"
+            value="Brasil"
+          />
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="TelefoneFixoEmpresa">Telefone Fixo:</label>
+          <input
+            type="text"
+            id="TelefoneFixoEmpresa"
+            placeholder="(XX) XXXX-XXXX"
+          />
+        </div>
+        <div>
+          <label for="TelefoneCelularEmpresa">Telefone Celular:</label>
+          <input
+            type="text"
+            id="TelefoneCelularEmpresa"
+            placeholder="(XX) XXXXX-XXXX"
+          />
+        </div>
+        <div>
+          <label for="EmailCorporativoEmpresa">E-mail Corporativo:</label>
+          <input
+            type="email"
+            id="EmailCorporativoEmpresa"
+            placeholder="empresa@email.com"
+          />
+        </div>
+      </div>
+
+      <!-- Botão único para salvar tudo -->
+    <div style="text-align: center; margin-top: 30px">
+      <button
+        class="btn"
+        onclick="salvarDados()"
+        style="
+          background-color: var(--primary);
+          color: white;
+          font-size: 16px;
+          padding: 12px 30px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        "
+      >
+        Salvar
+      </button>
+    </div>
+    </div>
+
+    <script>
+      // Função para obter parâmetros da URL (ex: ?id=5)
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      // Função para carregar dados do cliente
+      async function carregarCliente() {
+        const clienteId = getQueryParam("id");
+        if (!clienteId) return; // se não tem id, é cadastro novo
+
+        try {
+          const res = await fetch(
+            `http://localhost:3000/clientes/${clienteId}`
+          );
+          if (!res.ok) throw new Error("Erro ao buscar cliente no servidor");
+
+          const cliente = await res.json();
+
+          // Preencher os inputs
+          document.getElementById("NomeFantasia").value =
+            cliente.nome_fantasia || "";
+          document.getElementById("CNPJ").value = cliente.cnpj || "";
+          document.getElementById("InscricaoEstadual").value =
+            cliente.inscricao_estadual || "";
+          document.getElementById("InscricaoMunicipal").value =
+            cliente.inscricao_municipal || "";
+          document.getElementById("RegimeTributario").value =
+            cliente.regime_tributario || "";
+          document.getElementById("CEP_Empresa").value = cliente.cep || "";
+          document.getElementById("LogradouroEmpresa").value =
+            cliente.logradouro || "";
+          document.getElementById("NumeroEmpresa").value = cliente.numero || "";
+          document.getElementById("ComplementoEmpresa").value =
+            cliente.complemento || "";
+          document.getElementById("BairroEmpresa").value = cliente.bairro || "";
+          document.getElementById("CidadeEmpresa").value = cliente.cidade || "";
+          document.getElementById("EstadoEmpresa").value = cliente.estado || "";
+          document.getElementById("PaisEmpresa").value =
+            cliente.pais || "Brasil";
+          document.getElementById("TelefoneFixoEmpresa").value =
+            cliente.telefone_fixo || "";
+          document.getElementById("TelefoneCelularEmpresa").value =
+            cliente.telefone_celular || "";
+          document.getElementById("EmailCorporativoEmpresa").value =
+            cliente.email_corporativo || "";
+        } catch (error) {
+          console.error("Erro:", error);
+          alert("Não foi possível carregar os dados do cliente.");
+        }
+      }
+
+      // Função para salvar cliente (novo ou existente)
+      async function salvarDados() {
+        const clienteId = getQueryParam("id");
+
+        const dados = {
+          nome_fantasia: document.getElementById("NomeFantasia").value,
+          cnpj: document.getElementById("CNPJ").value,
+          inscricao_estadual:
+            document.getElementById("InscricaoEstadual").value,
+          inscricao_municipal:
+            document.getElementById("InscricaoMunicipal").value,
+          regime_tributario: document.getElementById("RegimeTributario").value,
+          cep: document.getElementById("CEP_Empresa").value,
+          logradouro: document.getElementById("LogradouroEmpresa").value,
+          numero: document.getElementById("NumeroEmpresa").value,
+          complemento: document.getElementById("ComplementoEmpresa").value,
+          bairro: document.getElementById("BairroEmpresa").value,
+          cidade: document.getElementById("CidadeEmpresa").value,
+          estado: document.getElementById("EstadoEmpresa").value,
+          pais: document.getElementById("PaisEmpresa").value,
+          telefone_fixo: document.getElementById("TelefoneFixoEmpresa").value,
+          telefone_celular: document.getElementById("TelefoneCelularEmpresa")
+            .value,
+          email_corporativo: document.getElementById("EmailCorporativoEmpresa")
+            .value,
+        };
+
+        try {
+          const url = clienteId
+            ? `http://localhost:3000/clientes/${clienteId}` // atualizar
+            : "http://localhost:3000/clientes"; // criar novo
+
+          const method = clienteId ? "PUT" : "POST";
+
+          const res = await fetch(url, {
+            method: method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dados),
+          });
+
+          if (!res.ok) throw new Error("Erro ao salvar cliente");
+
+          alert("✅ Dados salvos com sucesso!");
+          window.location.href = "cliente.html"; // volta para lista
+        } catch (error) {
+          console.error("Erro:", error);
+          alert("❌ Não foi possível salvar os dados.");
+        }
+      }
+
+      // Carrega cliente se for edição
+      carregarCliente();
+
+      function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.top.location.href = "index.html?voltar=1";
+      }
+    </script>
+  </body>
 </html>

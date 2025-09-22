@@ -77,10 +77,42 @@
     .delete-icon {
       color: #dc3545;
     }
+
+    .btn-sair {
+        background-color: #e74c3c;
+        border: none;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s ease;
+      }
+
+      .btn-sair:hover {
+        background-color: #c0392b;
+      }
+
+      header {
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 20px;
+      }
   </style>
 </head>
 <body>
-  <header>Colaboradores - Timesheet</header>
+  <header>
+    <h1>Colaboradores - Timesheet</h1>
+    <button class="btn-sair" onclick="logout()">Sair</button>
+  </header>
   <div class="container">
     <div class="buttons">
       <button onclick="adicionarColaborador()">+ Novo Colaborador</button>
@@ -132,6 +164,12 @@
         alert("Colaborador " + nome + " excluído!");
       }
     }
+
+    function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.top.location.href = "index.html?voltar=1";
+      }
   </script>
 </body>
 </html>

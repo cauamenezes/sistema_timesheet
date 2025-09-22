@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Timesheet - Lançamentos</title>
+  <title>Lançamentos - Timesheet</title>
   <style>
     body {
       margin: 0;
@@ -15,17 +15,11 @@
     }
  
     .header {
-      background-color: #004b8d;
-      color: white;
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
- 
-    .header h1 {
-      font-size: 20px;
-      margin: 0;
+    background-color: #004b8d;
+    color: white;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
     }
  
     .btn-sair {
@@ -74,7 +68,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Timesheet - Lançamentos</title>
+  <title>Lançamentos - Timesheet</title>
   <style>
   .mes-legenda-wrapper {
     display: flex;
@@ -137,7 +131,6 @@
     font-family: 'Segoe UI', sans-serif;
     background: var(--background);
     color: var(--text);
-    padding: 20px;
   }
  
   header {
@@ -147,7 +140,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 8px;
   }
  
   h1 {
@@ -171,6 +163,8 @@
     border-radius: 10px;
     box-shadow: 0 0 8px rgba(0, 0, 0, .05);
     overflow-x: auto;
+    margin: 20px;
+    margin-top: 30px;
   }
  
   .mes-wrapper {
@@ -286,8 +280,8 @@
 </head>
 <body>
   <header>
-    <h1>Timesheet - Lançamentos</h1>
-    <button class="btn-voltar" onclick="voltarMenu()">Voltar ao Menu</button>
+    <h1>Lançamentos - Timesheet</h1>
+    <button class="btn-sair" onclick="logout()">Sair</button>
   </header>
  
   <div class="form-section">
@@ -335,9 +329,6 @@
   </div>
  
 <script>
-function voltarMenu() {
-  window.location.href = "inicio.html";
-}
  
 const feriadosFixos = ['01-01', '21-04', '01-05', '07-09', '12-10', '02-11', '15-11', '25-12'];
  
@@ -452,6 +443,12 @@ function excluirLinha(btn) {
 function salvarApontamento() {
   alert('Apontamento salvo com sucesso!');
 }
+
+function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.top.location.href = "index.html?voltar=1";
+      }
 </script>
 </body>
 </html

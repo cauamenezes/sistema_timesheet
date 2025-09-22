@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Timesheet Completo</title>
+    <title>Dados Colaborador - Timesheet</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
@@ -32,14 +32,13 @@
       font-family: "Segoe UI", sans-serif;
       background-color: var(--background-light);
       color: var(--text-light);
-      padding: 20px;
       margin: 0;
     }
 
     header {
       background-color: var(--primary);
       color: white;
-      padding: 20px;
+      padding: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -47,7 +46,7 @@
 
     header h1 {
       margin: 0;
-      font-size: 22px;
+      font-size: 20px;
     }
 
     .btn-sair {
@@ -67,6 +66,7 @@
       color: var(--primary);
       font-size: 16px;
       font-weight: normal;
+      margin: 20px;
     }
 
     h2:first-of-type {
@@ -97,8 +97,12 @@
       border: 1px solid #bbb;
       border-radius: 10px;
       padding: 20px 25px;
-      margin-bottom: 20px;
       box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.05);
+      margin: 20px;
+    }
+
+    .form-section h2 {
+      margin-left: 0px;
     }
 
     .form-row {
@@ -173,29 +177,31 @@
     .signature div {
       text-align: center;
     }
+
+    #dados-bancarios{ 
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+
+    .btn-sair {
+        background-color: #e74c3c;
+        border: none;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s ease;
+      }
+
+      .btn-sair:hover {
+        background-color: #c0392b;
+      }
   </style>
 
   <header>
-    <h1>Bem-vindo ao Painel do Consultor</h1>
-    <!-- Botão Voltar ao Menu -->
-    <button
-      onclick="window.location.href='inicio.html'"
-      style="
-        padding: 10px 20px;
-        background-color: #000000;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      "
-      onmouseover="this.style.backgroundColor='#000000'"
-      onmouseout="this.style.backgroundColor='#000000'"
-    >
-      Voltar ao Menu
-    </button>
+    <h1>Dados Colaborador - Timesheet</h1>
+    <button class="btn-sair" onclick="logout()">Sair</button>
   </header>
 
   <h2>CIDIC CONSULTORIA EM T.I</h2>
@@ -517,7 +523,7 @@
     </div>
 
     <!--Dados Bancários -->
-    <div class="form-section">
+    <div class="form-section" id="dados-bancarios">
       <h2>Dados Bancários:</h2>
 
       <div class="form-row">
@@ -559,7 +565,7 @@
           box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         "
       >
-        Salvar Tudo
+        Salvar
       </button>
     </div>
 
@@ -644,6 +650,12 @@
           console.error(err);
           alert("Erro ao salvar colaborador");
         }
+      }
+
+      function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.top.location.href = "index.html?voltar=1";
       }
 
     </script>
