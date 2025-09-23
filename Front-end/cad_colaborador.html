@@ -223,7 +223,7 @@
     <div class="form-row">
       <div>
         <label for="nome">Nome completo:</label>
-        <input type="text" id="nome" placeholder="Nome completo" required />
+        <input type="text" id="nome_completo" placeholder="Nome completo" required />
       </div>
 
       <div>
@@ -238,7 +238,7 @@
 
       <div>
         <label for="nascimento">Data de nascimento:</label>
-        <input type="date" id="nascimento" placeholder="dd/mm/aaaa" />
+        <input type="date" id="data_nascimento" placeholder="dd/mm/aaaa" />
       </div>
     </div>
 
@@ -247,8 +247,8 @@
         <label for="sexo">Sexo:</label>
         <select id="sexo" style="max-width: 120px">
           <option value="" disabled selected>Selecione</option>
-          <option value="M">Masculino</option>
-          <option value="F">Feminino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Feminino">Feminino</option>
         </select>
       </div>
 
@@ -369,21 +369,21 @@
     <div class="form-row">
       <div>
         <label for="Nome Fantasia">Nome Fantasia:</label>
-        <input type="text" id="NomeFantasia" placeholder="Nome comercial" />
+        <input type="text" id="nome_fantasia" placeholder="Nome comercial" />
       </div>
     </div>
 
     <div class="form-row">
       <div>
         <label for="CNPJ">CNPJ:</label>
-        <input type="text" id="CNPJ" placeholder="CNPJ da empresa" />
+        <input type="text" id="cnpj" placeholder="CNPJ da empresa" />
       </div>
 
       <div>
         <label for="InscricaoEstadual">Inscrição Estadual:</label>
         <input
           type="text"
-          id="InscricaoEstadual"
+          id="inscricao_estadual"
           placeholder="Inscrição Estadual"
         />
       </div>
@@ -392,7 +392,7 @@
         <label for="InscricaoMunicipal">Inscrição Municipal:</label>
         <input
           type="text"
-          id="InscricaoMunicipal"
+          id="inscricao_municipal"
           placeholder="Inscrição Municipal"
         />
       </div>
@@ -401,7 +401,7 @@
         <label for="RegimeTributario">Regime Tributário:</label>
         <input
           type="text"
-          id="RegimeTributario"
+          id="regime_tributario"
           placeholder="Regime Tributário"
         />
       </div>
@@ -410,7 +410,7 @@
         <label for="CEP_Empresa">CEP:</label>
         <input
           type="text"
-          id="CEP_Empresa"
+          id="cep_empresa"
           placeholder="CEP"
           style="max-width: 120px"
         />
@@ -422,40 +422,40 @@
         <label for="LogradouroEmpresa">Logradouro:</label>
         <input
           type="text"
-          id="LogradouroEmpresa"
+          id="logradouro_empresa"
           placeholder="Rua, Avenida, etc."
         />
       </div>
 
       <div>
         <label for="NumeroEmpresa">Número:</label>
-        <input type="text" id="NumeroEmpresa" placeholder="Nº" />
+        <input type="text" id="numero_empresa" placeholder="Nº" />
       </div>
 
       <div>
         <label for="ComplementoEmpresa">Complemento:</label>
         <input
           type="text"
-          id="ComplementoEmpresa"
+          id="complemento_empresa"
           placeholder="Apto, bloco, etc."
         />
       </div>
 
       <div>
         <label for="BairroEmpresa">Bairro:</label>
-        <input type="text" id="BairroEmpresa" placeholder="Bairro" />
+        <input type="text" id="bairro_empresa" placeholder="Bairro" />
       </div>
     </div>
 
     <div class="form-row">
       <div>
         <label for="CidadeEmpresa">Cidade:</label>
-        <input type="text" id="CidadeEmpresa" placeholder="Cidade" />
+        <input type="text" id="cidade_empresa" placeholder="Cidade" />
       </div>
 
       <div>
         <label for="EstadoEmpresa">Estado:</label>
-        <select id="EstadoEmpresa" style="max-width: 120px">
+        <select id="estado_empresa" style="max-width: 120px">
           <option value="" disabled selected>Selecione</option>
           <option value="AC">AC</option>
           <option value="AL">AL</option>
@@ -489,7 +489,7 @@
 
       <div>
         <label for="PaisEmpresa">País:</label>
-        <input type="text" id="PaisEmpresa" placeholder="País" value="Brasil" />
+        <input type="text" id="pais_empresa" placeholder="País" value="Brasil" />
       </div>
     </div>
 
@@ -498,7 +498,7 @@
         <label for="TelefoneFixoEmpresa">Telefone Fixo:</label>
         <input
           type="text"
-          id="TelefoneFixoEmpresa"
+          id="telefone_fixo_empresa"
           placeholder="(XX) XXXX-XXXX"
         />
       </div>
@@ -507,7 +507,7 @@
         <label for="TelefoneCelularEmpresa">Telefone Celular:</label>
         <input
           type="text"
-          id="TelefoneCelularEmpresa"
+          id="telefone_celular_empresa"
           placeholder="(XX) XXXXX-XXXX"
         />
       </div>
@@ -516,7 +516,7 @@
         <label for="EmailCorporativoEmpresa">E-mail Corporativo:</label>
         <input
           type="email"
-          id="EmailCorporativoEmpresa"
+          id="email_corporativo_empresa"
           placeholder="empresa@email.com"
         />
       </div>
@@ -541,7 +541,7 @@
           <label for="chavePix">Chave Pix:</label>
           <input
             type="text"
-            id="chavePix"
+            id="chave_pix"
             placeholder="E-mail, CPF ou número de telefone"
           />
         </div>
@@ -578,15 +578,15 @@
         // Monta o objeto com os dados do form
         const colaborador = {
           tipo_perfil: document.getElementById("tipo_perfil").value,
-          nome: document.getElementById("nome").value,
+          nome_completo: document.getElementById("nome_completo").value,
           cpf: document.getElementById("cpf").value,
           rg: document.getElementById("rg").value,
-          nascimento: document.getElementById("nascimento").value,
+          data_nascimento: document.getElementById("data_nascimento").value,
           sexo: document.getElementById("sexo").value,
           email: document.getElementById("email").value,
           senha: document.getElementById("senha").value,
           celular: document.getElementById("celular").value,
-          cep: document.getElementById("cep").value,
+          cep: document.getElementById("cep").value.slice(0, 8),
           rua: document.getElementById("rua").value,
           numero: document.getElementById("numero").value,
           complemento: document.getElementById("complemento").value,
@@ -595,34 +595,34 @@
           estado: document.getElementById("estado").value,
 
           // Empresa
-          NomeFantasia: document.getElementById("NomeFantasia").value,
-          CNPJ: document.getElementById("CNPJ").value,
-          InscricaoEstadual: document.getElementById("InscricaoEstadual").value,
-          InscricaoMunicipal:
-            document.getElementById("InscricaoMunicipal").value,
-          RegimeTributario: document.getElementById("RegimeTributario").value,
-          CEP_Empresa: document.getElementById("CEP_Empresa").value,
-          LogradouroEmpresa: document.getElementById("LogradouroEmpresa").value,
-          NumeroEmpresa: document.getElementById("NumeroEmpresa").value,
-          ComplementoEmpresa:
-            document.getElementById("ComplementoEmpresa").value,
-          BairroEmpresa: document.getElementById("BairroEmpresa").value,
-          CidadeEmpresa: document.getElementById("CidadeEmpresa").value,
-          EstadoEmpresa: document.getElementById("EstadoEmpresa").value,
-          PaisEmpresa: document.getElementById("PaisEmpresa").value,
-          TelefoneFixoEmpresa: document.getElementById("TelefoneFixoEmpresa")
+          nome_fantasia: document.getElementById("nome_fantasia").value,
+          cnpj: document.getElementById("cnpj").value,
+          inscricao_estadual: document.getElementById("inscricao_estadual").value,
+          inscricao_municipal:
+            document.getElementById("inscricao_municipal").value,
+          regime_tributario: document.getElementById("regime_tributario").value,
+          cep_empresa: document.getElementById("cep_empresa").value.slice(0, 8),
+          logradouro_empresa: document.getElementById("logradouro_empresa").value,
+          numero_empresa: document.getElementById("numero_empresa").value,
+          complemento_empresa:
+            document.getElementById("complemento_empresa").value,
+          bairro_empresa: document.getElementById("bairro_empresa").value,
+          cidade_empresa: document.getElementById("cidade_empresa").value,
+          estado_empresa: document.getElementById("estado_empresa").value,
+          pais_empresa: document.getElementById("pais_empresa").value,
+          telefone_fixo_empresa: document.getElementById("telefone_fixo_empresa")
             .value,
-          TelefoneCelularEmpresa: document.getElementById(
-            "TelefoneCelularEmpresa"
+          telefone_celular_empresa: document.getElementById(
+            "telefone_celular_empresa"
           ).value,
-          EmailCorporativoEmpresa: document.getElementById(
-            "EmailCorporativoEmpresa"
+          email_corporativo_empresa: document.getElementById(
+            "email_corporativo_empresa"
           ).value,
 
           // Bancários
           agencia: document.getElementById("agencia").value,
           conta: document.getElementById("conta").value,
-          chavePix: document.getElementById("chavePix").value,
+          chave_pix: document.getElementById("chave_pix").value,
         };
 
         try {
